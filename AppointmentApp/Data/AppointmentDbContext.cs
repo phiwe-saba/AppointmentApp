@@ -8,5 +8,6 @@ namespace AppointmentApp.Data
         public AppointmentDbContext(DbContextOptions<AppointmentDbContext> options) : base(options) { }
 
         public DbSet<City> Cities { get; set; }
+        public DbSet<Suburb> Suburbs { get; set; }
     }
 }
