@@ -10,6 +10,7 @@
         <div class="mb-3">
             <label asp-for="CityName"></label>
             <input asp-for="CityName" class="form-group"/>
+            <span asp-validation-for="CityName" class="text-danger"></span>
         </div>
         
         <button type="submit" class="btn btn-primary" style="width:150px">Create</button>

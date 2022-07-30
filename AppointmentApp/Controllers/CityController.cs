@@ -33,6 +33,7 @@ namespace AppointmentApp.Controllers
             {
                 _db.Cities.Add(city);
                 _db.SaveChanges();
+                TempData["success"] = "City created successfully";
                 return RedirectToAction("Index");
             }
             return View(city);
@@ -65,6 +66,7 @@ namespace AppointmentApp.Controllers
             {
                 _db.Cities.Update(city);
                 _db.SaveChanges();
+                TempData["success"] = "City updated successfully";
                 return RedirectToAction("Index");
             }
             return View(city);
@@ -101,6 +103,7 @@ namespace AppointmentApp.Controllers
 
             _db.Cities.Remove(cityValue);
             _db.SaveChanges();
+            TempData["success"] = "City deleted successfully";
             return RedirectToAction("Index");
         }
     }
