@@ -1,6 +1,7 @@
 ﻿using AppointmentApp.Data;
 using AppointmentApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace AppointmentApp.Controllers
 {
@@ -14,21 +15,41 @@ namespace AppointmentApp.Controllers
         }
         public IActionResult Index()
         {
-            IEnumerable<Suburb> suburbList = _db.Suburbs.ToList();
+            IEnumerable<Suburb> suburbList = _db.Suburbs;
+
+            
             return View(suburbList);
         }
 
         //GET
         public IActionResult Create()
         {
+            List<City> cityList = new List<City>();
+            cityList = (from city in _db.Cities select city).ToList();
+            cityList.Insert(0, new City { CityId = 0, CityName = "Select city" });
+            ViewBag.ListOfCities = cityList;
+
+            //ViewBag.CityId = new SelectList(_db.Cities, "CityId", "CityName");
             return View();
         }
 
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Suburb suburb)
+        public IActionResult Create(Suburb suburb, City city)
         {
+            if (city.CityName == "" || city.CityName == null)
+            {
+                TempData["error"] = "City is not selected";
+            }
+            string cityValue = city.CityName;
+            ViewBag.SelectedValue = city.CityName;
+
+            List<City> cityList = new List<Models.City>();
+            cityList = (from cities in _db.Cities select city).ToList();
+            cityList.Insert(0, new City { CityId = 0, CityName = "Select city" });
+            ViewBag.ListOfCities = cityList;
+
             if (ModelState.IsValid)
             {
                 _db.Suburbs.Add(suburb);
@@ -36,6 +57,8 @@ namespace AppointmentApp.Controllers
                 TempData["success"] = "City created successfully";
                 return RedirectToAction("Index");
             }
+
+            //ViewBag.CityId = new SelectList(_db.Cities, "CityId", "CityName", suburb.CityId);
             return View(suburb);
         }
 

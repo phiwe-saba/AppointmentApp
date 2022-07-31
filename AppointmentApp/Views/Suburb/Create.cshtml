@@ -1,6 +1,6 @@
 ﻿@model Suburb
 
-<form method="post">
+<form method="post" asp-action="Create" asp-controller="Suburb">
     <div class="border p-3 mt-4">
         <div class="row pb-2">
             <h2 class="text-primary">Add suburb</h2>
@@ -21,11 +21,12 @@
 
         <div class="mb-3">
             <label asp-for="CityId"></label>
-            <input asp-for="CityId" class="form-control"/>
+            <!--<input asp-for="CityId" class="form-control"/>-->
+            <select asp-for="CityId" asp-items="@(new SelectList(@ViewBag.CityId, "CityId", "CityName"))" class="form-control"></select>
             <span asp-validation-for="CityId" class="text-danger"></span>
         </div>
         
         <button type="submit" class="btn btn-primary" style="width:150px">Add</button>
-        <a asp-controller="City" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to list</a>
+        <a asp-controller="Suburb" asp-action="Index" class="btn btn-secondary" style="width:150px">Back to list</a>
     </div>
 </form>

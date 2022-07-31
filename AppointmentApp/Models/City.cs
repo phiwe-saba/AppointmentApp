@@ -10,6 +10,6 @@ namespace AppointmentApp.Models
         [Required]
         [DisplayName("City Name")]
         public string CityName { get; set; }
-        public List<Suburb> Suburbs { get; set; } = new List<Suburb>();
+        public ICollection<Suburb> Suburbs { get; set; }
     }
 }

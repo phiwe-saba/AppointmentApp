@@ -13,9 +13,9 @@ namespace AppointmentApp.Models
         [Required]
         [DisplayName("Postal Code")]
         public int PostalCode { get; set; }
-        [Required]
         [DisplayName("City Name:")]
         public int CityId { get; set; }
         public City City { get; set; }
+        public ICollection<Patient> Patient { get; set; }
     }
 }
