@@ -27,6 +27,6 @@ namespace AppointmentApp.Models
         [DisplayName("Suburb Name")]
         public int SuburbId { get; set; }
         public Suburb Suburb { get; set; }
-        //public ICollection<Appointment> Appointments { get; set; }
+        public ICollection<Appointment> Appointments { get; set; }
     }
 }

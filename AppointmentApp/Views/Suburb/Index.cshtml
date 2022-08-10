@@ -15,8 +15,9 @@
         <thead>
             <tr>
                 <th>Suburb name</th>
-                <th>Postal Code</th>
                 <th>City Name</th>
+                <th>Postal Code</th>
+                
             </tr>
         </thead>
         <tbody>
@@ -24,7 +25,8 @@
             {
                 <tr>
                     <td width="50%">@suburbValue.SuburbName</td>
-                
+                    <td width="50%">@suburbValue.City.CityName</td>
+                    <td width="30%">@suburbValue.PostalCode</td>
                     <td width="30%">
                         <div class="w-75 btn-group" role="group">
                             <a asp-controller="Suburb" asp-action="Edit" asp-route-id="@suburbValue.SuburbId" class="btn btn-primary mx-2">Edit</a>
