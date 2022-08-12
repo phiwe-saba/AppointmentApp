@@ -1,7 +1,36 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-}
+﻿@model IEnumerable<Doctor>
 
-<h1>Index</h1>
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Doctor List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="Doctor" asp-action="Create" class="btn btn-primary">Create new Doctor</a>
+        </div>
+    </div>
 
+    <table class="table" style="width:100%">
+        <thead>
+            <tr>
+                <th>Doctor name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var doctorValue in Model)
+            {
+                <tr>
+                    <td width="50%">@doctorValue.FirstName</td>
+                    <td width="50%">@doctorValue.LastName</td>
+                
+                    <td width="30%">
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-controller="Doctor" asp-action="Edit" asp-route-id="@doctorValue.DoctorId" class="btn btn-primary mx-2">Edit</a>
+                            <a asp-controller="Doctor" asp-action="Delete" asp-route-id="@doctorValue.DoctorId" class="btn btn-secondary mx-2">Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

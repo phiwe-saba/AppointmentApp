@@ -9,5 +9,8 @@ namespace AppointmentApp.Data
 
         public DbSet<City> Cities { get; set; }
         public DbSet<Suburb> Suburbs { get; set; }
+        public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Patient> Patients { get; set; }
     }
 }

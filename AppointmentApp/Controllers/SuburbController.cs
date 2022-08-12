@@ -15,61 +15,25 @@ namespace AppointmentApp.Controllers
         }
         public IActionResult Index()
         {
-            List<City> cityList = new List<City>();
-            cityList = (from city in _db.Cities select city).ToList();
-            cityList.Insert(0, new City { CityId = 0, CityName = "Select city" });
-            ViewBag.ListOfCities = cityList;
-            IEnumerable<Suburb> suburbList = _db.Suburbs;
-
             
+            IEnumerable<Suburb> suburbList = _db.Suburbs;
             return View(suburbList);
         }
 
         //GET
         public IActionResult Create()
         {
-            
-            List<City> cityList = new List<City>();
-            cityList = (from city in _db.Cities select city).ToList();
-            cityList.Insert(0, new City { CityId = 0, CityName = "Select city" });
-            ViewBag.ListOfCities = cityList;
+            ViewBag.CityId = new SelectList(_db.Cities, "CityId", "CityName");
 
-            
+            //ViewBag.Cities = new SelectList(_db.Cities, "Cityid", "CityName");
             return View();
         }
 
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Suburb suburb)
+        public IActionResult Create([Bind("SuburbName, PostalCode, CityId")] Suburb suburb)
         {
-            //if (city.CityId == 0)
-            //{
-            //    TempData["error"] = "City is not selected";
-            //}
-            //int cityValue = city.CityId;
-            //ViewBag.SelectedValue = city.CityName;
-
-            //List<City> cityList = new List<Models.City>();
-            //cityList = (from cities in _db.Cities select city).ToList();
-            //cityList.Insert(0, new City { CityId = 0, CityName = "Select city" });
-            //ViewBag.ListOfCities = cityList;
-
-            //var cityList = (from city in _db.Cities
-            //                select new SelectListItem()
-            //                {
-            //                    Text = city.CityName,
-            //                    Value = city.CityId.ToString(),
-            //                }).ToList();
-
-            //cityList.Insert(0, new SelectListItem()
-            //{
-            //    Text = "Select city",
-            //    Value = String.Empty
-            //});
-
-            //ViewBag.listOfCities = cityList;
-
             if (ModelState.IsValid)
             {
                 _db.Suburbs.Add(suburb);
@@ -78,7 +42,7 @@ namespace AppointmentApp.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CityId = new SelectList(_db.Cities, "CityId", "CityName", suburb.CityId);
+            ViewBag.CityId = new SelectList(_db.Cities, "Cityid", "CityName");
             return View(suburb);
         }
 
